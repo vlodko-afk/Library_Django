@@ -1,0 +1,57 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+<h1>Order with id {{order_instance.id}}</h1>
+<ul>
+    <li><p>Taken by user with id {{order_instance.user.id}}</p>
+        <ul>
+            <li>
+                <p>First name: {{order_instance.user.first_name}}</p>
+            </li>
+            <li>
+                <p>Middle name: {{order_instance.user.middle_name}}</p>
+            </li>
+            <li>
+                <p>Last name: {{order_instance.user.last_name}}</p>
+            </li>
+            <li>
+                <p>Email: {{order_instance.user.email}}</p>
+            </li>
+            <li>
+                <p>Created at {{order_instance.user.created_at}}</p>
+            </li>
+            <li>
+                <p>Role {{order_instance.user.get_role_name}}</p>
+            </li>
+            <li>
+                <p>Is active? {{order_instance.user.is_active}}</p>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>Book with id {{order_instance.book.id}}</p>
+        <ul>
+            <li>
+                <p>Name: {{order_instance.book.name}}</p>
+            </li>
+            <li>
+                <p>Description: {{order_instance.book.description}}</p>
+            </li>
+            <li>
+                <p>Authors: {%if order_instance.book.authors%}
+
+                    {{order_instance.book.get_authors_string}},
+
+                    {%endif%}
+                </p>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>Created at {{order_instance.created_at}}</p>
+    </li>
+    <li>
+        <p>Plated end at {{order_instance.plated_end_at}}</p>
+    </li>
+</ul>
+{% endblock %}

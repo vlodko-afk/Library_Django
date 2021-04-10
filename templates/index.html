@@ -1,0 +1,38 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+  <div class="container">
+        <div class="col-md-10 offset-md-1 mt-5">
+          <div class="jumbotron">
+            <h1 class="display-4">Вас вітає Lviv Library</h1>
+            <p class="lead font-italic">Найбільша бібліотека в Україні!</p>
+            <hr class="my-4">
+            <table class="table table-borderless">
+		        <thead class="border-bottom font-wight-bold">
+			        	<tr>
+			        		<td>Назва</td>
+			            	<td>Автор</td>
+			            	<td>Опис</td>
+			            	<td>Кількість</td>
+				  		</tr>
+				  	<tbody>
+				  		{% if books %}
+				  			{% for el in books %}
+					    	<tr>
+					      		<td><h6>{{ el.name }}</h6></td>
+					      		<td>{{ el.authors }}</td>
+					      		<td>{{ el.description }}</td>
+					      		<td>{{ el.count }}</td>
+								</tr>
+				  	</tbody>
+				</thead>
+			  	{% endfor %}
+			{% else %}
+		      <h1>Нажаль зараз усі книги відсутні :(</h1>
+		    {% endif %}	
+		</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

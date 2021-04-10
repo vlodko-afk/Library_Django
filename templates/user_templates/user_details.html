@@ -1,0 +1,28 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <h1>User with id {{user_instance.id}}</h1>
+    <ul>
+        <li>
+        <p>First name: {{user_instance.first_name}}</p>
+      </li>
+         <li>
+        <p>Middle name: {{user_instance.middle_name}}</p>
+      </li>
+        <li>
+        <p>Last name: {{user_instance.last_name}}</p>
+      </li>
+        <li>
+        <p>Email:  {{user_instance.email}}</p>
+      </li>
+        <li>
+        <p>Created at {{user_instance.created_at}}</p>
+      </li>
+      <li>
+        <p>Role {{user_instance.get_role_name}}</p>
+      </li>
+        <li>
+        <p>Is active? {{user_instance.is_active}}</p>
+      </li>
+    </ul>
+{% endblock %}

@@ -1,1 +1,3 @@
-# Library_Django
+## Django
+
+`python manage.py runserver`

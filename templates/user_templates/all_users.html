@@ -1,0 +1,52 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+          <div class="container">
+            <div class="col-md-10 offset-md-1 mt-5">
+              <div class="jumbotron">
+                <h1 class="display-4">User Register</h1>
+                <p class="lead font-italic">Create,update or delete users</p>
+                <hr class="my-4">
+                <table class="table table-borderless">
+          <thead class="border-bottom font-wight-bold">
+            <tr>
+              <td>First Name</td>
+              <td>Middle Name</td>
+              <td>Last Name</td>
+              <td>Email</td>
+              <td>
+                <a href="{% url 'create_user' %}" class="btn btn-outline-success"><i class="fas fa-plus"></i>Add New</a>
+              </td>
+            </tr>
+          </thead>
+            <tbody>
+              {% if users_list %}
+                {% for user in users_list %}
+                <tr>
+                  <td>{{user.first_name}}</td>
+                  <td>{{user.last_name}}</td>
+                  <td>{{user.middle_name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>
+                    <a href="{% url 'update_user_by_id' user.id %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'delete_user_by_id' user.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <h1>Нажаль наданий момент не створено ні одного користувача :(</h1>
+              {% endif %}
+              
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>       
+{% endblock %}

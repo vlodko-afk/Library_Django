@@ -1,0 +1,52 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="container">
+            <div class="col-md-10 offset-md-1 mt-5">
+              <div class="jumbotron">
+                <h1 class="display-4">Order Register</h1>
+                <p class="lead font-italic">Create,update or delete orders</p>
+                <hr class="my-4">
+                <table class="table table-borderless">
+          <thead class="border-bottom font-wight-bold">
+            <tr>
+              <td>User</td>
+              <td>Book</td>
+              <td>Created at</td>
+              <td>Plated end at</td>
+              <td>
+                <a href="{% url 'create_order' %}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add New</a>
+              </td>
+            </tr>
+          </thead>
+            <tbody>
+              {% if orders_list %}
+                {% for order in orders_list %}
+                <tr>
+                  <td>{{order.user.first_name}} {{order.user.middle_name}}</td>
+                  <td>{{order.book.name}}</td>
+                  <td>{{order.created_at}}</td>
+                  <td>{{order.plated_end_at}}</td>
+                  <td>
+                    <a href="{% url 'update_order_by_id' order.id %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'delete_order_by_id' order.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <h1>Нажаль наданий момент не створено ні одного замовлення :(</h1>
+              {% endif %}
+              
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>         
+{% endblock %}

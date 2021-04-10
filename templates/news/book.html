@@ -1,0 +1,54 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+    <div class="container">
+            <div class="col-md-10 offset-md-1 mt-5">
+              <div class="jumbotron">
+                <h1 class="display-4">Book Register</h1>
+                <p class="lead font-italic">Create,update or delete books</p>
+                <hr class="my-4">
+                <table class="table table-borderless">
+          <thead class="border-bottom font-wight-bold">
+            <tr>
+              <td>Name</td>
+              <td>Author</td>
+              <td>Description</td>
+              <td>Count</td>
+              <td>
+                <a href="{% url 'create_book' %}" class="btn btn-outline-success"><i class="fas fa-plus"></i> Add New</a>
+              </td>
+            </tr>
+          </thead>
+            <tbody>
+              {% if all_book %}
+                {% for book in all_book %}
+                <tr>
+                  <td>{{book.name}}</td>
+                  {% for author in book.authors.all %}
+                  <td>{{ author.name }} {{ author.surname }} {{ author.patronymic}}</td>
+                  {% endfor %}
+                  <td>{{book.description}}</td>
+                  <td>{{book.count}}</td>
+                  <td>
+                    <a href="{% url 'book-update' book.id %}" class="btn text-secondary px-0">
+                      <i class="far fa-edit fa-lg"></i>
+                    </a>
+                    <form action="{% url 'book-delete' book.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <h1>Нажаль наданий момент не створено ні одної книги :(</h1>
+              {% endif %}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
